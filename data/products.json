@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "name": "Wireless Bluetooth Headphones",
+    "price": 89.99,
+    "description": "High-quality wireless headphones with noise cancellation and 30-hour battery life. Perfect for music lovers and professionals.",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    "category": "Electronics",
+    "rating": 4.5,
+    "reviews": 128
+  },
+  {
+    "id": "2",
+    "name": "Smart Fitness Watch",
+    "price": 199.99,
+    "description": "Advanced fitness tracker with heart rate monitoring, GPS, and 7-day battery life. Track your workouts and health metrics.",
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+    "category": "Electronics",
+    "rating": 4.3,
+    "reviews": 89
+  },
+  {
+    "id": "3",
+    "name": "Organic Cotton T-Shirt",
+    "price": 24.99,
+    "description": "Comfortable and sustainable organic cotton t-shirt. Available in multiple colors and sizes. Perfect for everyday wear.",
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+    "category": "Clothing",
+    "rating": 4.7,
+    "reviews": 256
+  },
+  {
+    "id": "4",
+    "name": "Stainless Steel Water Bottle",
+    "price": 19.99,
+    "description": "Insulated stainless steel water bottle that keeps drinks cold for 24 hours or hot for 12 hours. Eco-friendly and durable.",
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+    "category": "Home",
+    "rating": 4.6,
+    "reviews": 312
+  },
+  {
+    "id": "5",
+    "name": "Portable Bluetooth Speaker",
+    "price": 79.99,
+    "description": "Waterproof portable speaker with 360-degree sound and 20-hour battery life. Perfect for outdoor activities and parties.",
+    "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",
+    "category": "Electronics",
+    "rating": 4.4,
+    "reviews": 167
+  },
+  {
+    "id": "6",
+    "name": "Leather Wallet",
+    "price": 34.99,
+    "description": "Genuine leather wallet with multiple card slots and RFID protection. Classic design that fits comfortably in your pocket.",
+    "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop",
+    "category": "Accessories",
+    "rating": 4.8,
+    "reviews": 203
+  },
+  {
+    "id": "7",
+    "name": "Wireless Charging Pad",
+    "price": 29.99,
+    "description": "Fast wireless charging pad compatible with all Qi-enabled devices. Sleek design with LED indicator and safety features.",
+    "image": "https://images.unsplash.com/photo-1606107557195-0e4a0e2f80dd?w=400&h=400&fit=crop",
+    "category": "Electronics",
+    "rating": 4.2,
+    "reviews": 94
+  },
+  {
+    "id": "8",
+    "name": "Yoga Mat",
+    "price": 39.99,
+    "description": "Non-slip yoga mat made from eco-friendly materials. Perfect thickness for comfort and stability during practice.",
+    "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop",
+    "category": "Sports",
+    "rating": 4.6,
+    "reviews": 178
+  },
+  {
+    "id": "9",
+    "name": "Coffee Maker",
+    "price": 149.99,
+    "description": "Programmable coffee maker with built-in grinder and thermal carafe. Brews up to 12 cups with customizable strength.",
+    "image": "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=400&h=400&fit=crop",
+    "category": "Home",
+    "rating": 4.5,
+    "reviews": 145
+  },
+  {
+    "id": "10",
+    "name": "Running Shoes",
+    "price": 129.99,
+    "description": "Lightweight running shoes with responsive cushioning and breathable mesh upper. Ideal for road running and training.",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
+    "category": "Sports",
+    "rating": 4.7,
+    "reviews": 289
+  },
+  {
+    "id": "11",
+    "name": "Laptop Stand",
+    "price": 44.99,
+    "description": "Adjustable aluminum laptop stand with ergonomic design. Improves posture and provides better airflow for your device.",
+    "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop",
+    "category": "Electronics",
+    "rating": 4.4,
+    "reviews": 112
+  },
+  {
+    "id": "12",
+    "name": "Plant Pot Set",
+    "price": 27.99,
+    "description": "Set of 3 ceramic plant pots with drainage holes. Perfect for indoor plants and home decoration.",
+    "image": "https://images.unsplash.com/photo-1485955900006-10f4d64d6b36?w=400&h=400&fit=crop",
+    "category": "Home",
+    "rating": 4.6,
+    "reviews": 156
+  }
+]
