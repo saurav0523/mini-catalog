@@ -28,7 +28,7 @@ const WishlistClearAllButton = () => {
     );
   };
 
-  // Don't show button if no favorites
+
   if (favoriteIds.length === 0) {
     return null;
   }

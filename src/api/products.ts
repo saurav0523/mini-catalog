@@ -11,22 +11,22 @@ export interface Product {
   reviews: number;
 }
 
-// Simulate API delay for realistic feel
+
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchProducts = async (): Promise<Product[]> => {
-  await delay(800); // Simulate network delay
+  await delay(800); 
   return products as Product[];
 };
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
-  await delay(500); // Simulate network delay
+  await delay(500);
   const product = products.find(p => p.id === id);
   return (product as Product) || null;
 };
 
 export const searchProducts = async (query: string): Promise<Product[]> => {
-  await delay(600); // Simulate network delay
+  await delay(600);
   const lowercaseQuery = query.toLowerCase();
   return products.filter(
     product =>

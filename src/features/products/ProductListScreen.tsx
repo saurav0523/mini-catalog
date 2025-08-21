@@ -30,12 +30,11 @@ const ProductListScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
-  // Clear navigation cache when screen comes into focus
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('ProductList focused - clearing navigation cache');
-      // Clear any nested navigation stack to ensure we're at the root
-      // Note: popToTop is not available in this context
+
     });
 
     return unsubscribe;
@@ -52,7 +51,7 @@ const ProductListScreen = () => {
     queryFn: fetchProducts,
   });
 
-  // Fast local search - no API calls needed
+
   const filteredProducts = useMemo(() => {
     if (!searchQuery.trim()) return products;
     
@@ -231,7 +230,7 @@ const ProductListScreen = () => {
   if (isLoading || isRefetching) {
     return (
       <SafeAreaView style={styles.container}>
-        {/* Search Bar Skeleton */}
+
         <View style={styles.skeletonSearchContainer}>
           <View style={styles.skeletonSearchBar}>
             <View style={styles.skeletonSearchIcon} />
@@ -241,7 +240,7 @@ const ProductListScreen = () => {
         </View>
         
         <View style={styles.skeletonGrid}>
-          {/* First Row */}
+
           <View style={styles.skeletonRow}>
             <View style={styles.skeletonCard}>
               <View style={styles.skeletonImage} />
@@ -260,7 +259,7 @@ const ProductListScreen = () => {
               </View>
             </View>
           </View>
-          {/* Second Row */}
+
           <View style={styles.skeletonRow}>
             <View style={styles.skeletonCard}>
               <View style={styles.skeletonImage} />
@@ -279,7 +278,7 @@ const ProductListScreen = () => {
               </View>
             </View>
           </View>
-          {/* Third Row */}
+      
           <View style={styles.skeletonRow}>
             <View style={styles.skeletonCard}>
               <View style={styles.skeletonImage} />
@@ -332,7 +331,7 @@ const ProductListScreen = () => {
             placeholder={t('search_placeholder')}
             value={searchQuery}
             onChangeText={handleSearchChange}
-            onSubmitEditing={() => {}} // No action on submit for instant results
+            onSubmitEditing={() => {}} 
             returnKeyType="search"
           />
           {searchQuery.length > 0 && (
@@ -381,7 +380,7 @@ const ProductListScreen = () => {
         ListEmptyComponent={
           isRefetching ? (
             <>
-              {/* Search Bar Skeleton for Refresh */}
+
               <View style={styles.skeletonSearchContainer}>
                 <View style={styles.skeletonSearchBar}>
                   <View style={styles.skeletonSearchIcon} />
@@ -391,7 +390,7 @@ const ProductListScreen = () => {
               </View>
               
               <View style={styles.skeletonGrid}>
-                {/* First Row */}
+
                 <View style={styles.skeletonRow}>
                   <View style={styles.skeletonCard}>
                     <View style={styles.skeletonImage} />
@@ -410,7 +409,7 @@ const ProductListScreen = () => {
                     </View>
                   </View>
                 </View>
-                {/* Second Row */}
+
                 <View style={styles.skeletonRow}>
                   <View style={styles.skeletonCard}>
                     <View style={styles.skeletonImage} />
@@ -429,7 +428,7 @@ const ProductListScreen = () => {
                     </View>
                   </View>
                 </View>
-                {/* Third Row */}
+
                 <View style={styles.skeletonRow}>
                   <View style={styles.skeletonCard}>
                     <View style={styles.skeletonImage} />

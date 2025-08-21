@@ -27,10 +27,8 @@ const ProductStack = () => {
   const navigation = useNavigation<any>();
   const { theme } = useTheme();
 
-  // Clear navigation stack when Products tab is focused
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      // This ensures navigation cache is cleared
       console.log('Products tab focused - clearing navigation cache');
     });
 
@@ -125,7 +123,7 @@ const RootNavigator = () => {
           fontSize: 18,
           color: theme.colors.navigationTitle,
         },
-        headerLargeTitle: false, // Disable large title for more compact header
+        headerLargeTitle: false, 
       })}
     >
       <Tab.Screen

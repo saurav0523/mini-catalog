@@ -12,7 +12,7 @@ const LanguageToggle = () => {
   const toggleLanguage = () => {
     const newLanguage = currentLanguage === 'en' ? 'ar' : 'en';
     
-    // Animate the button press
+  
     Animated.sequence([
       Animated.timing(scaleAnim, {
         toValue: 0.9,

@@ -46,12 +46,11 @@ const CartScreen = () => {
   const [discount, setDiscount] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
-  // Clear navigation cache when screen comes into focus
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Cart focused - clearing navigation cache');
-      // Clear any nested navigation stack to ensure we're at the root
-      // Note: popToTop is not available in this context
+
     });
 
     return unsubscribe;
@@ -62,7 +61,7 @@ const CartScreen = () => {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    // Simulate refresh - in real app, this would reload data
+
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
@@ -82,10 +81,10 @@ const CartScreen = () => {
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     if (newQuantity <= 0) {
-      // If quantity reaches 0 or below, remove item from cart
+
       dispatch(removeFromCart(itemId));
     } else {
-      // Update quantity normally
+
       dispatch(updateQuantity({ id: itemId, quantity: newQuantity }));
     }
   };
@@ -101,7 +100,7 @@ const CartScreen = () => {
         return;
       }
 
-      const discountAmount = subtotal * 0.1; // 10% discount
+      const discountAmount = subtotal * 0.1; 
       setDiscount(discountAmount);
       setAppliedPromo(true);
       reset();
@@ -450,7 +449,7 @@ const CartScreen = () => {
         ListEmptyComponent={
           refreshing ? (
             <>
-              {/* Search Bar Skeleton for Refresh */}
+
               <View style={styles.skeletonSearchContainer}>
                 <View style={styles.skeletonSearchBar}>
                   <View style={styles.skeletonSearchIcon} />
@@ -460,7 +459,7 @@ const CartScreen = () => {
               </View>
               
               <View style={styles.skeletonGrid}>
-                {/* First Skeleton Item */}
+
                 <View style={styles.skeletonCartItem}>
                   <View style={styles.skeletonItemImage}>
                     <Loader height={80} />
@@ -482,7 +481,7 @@ const CartScreen = () => {
                     </View>
                   </View>
                 </View>
-                {/* Second Skeleton Item */}
+
                 <View style={styles.skeletonCartItem}>
                   <View style={styles.skeletonItemImage}>
                     <Loader height={80} />
@@ -510,7 +509,7 @@ const CartScreen = () => {
         }
       />
 
-      {/* Promo Code Section */}
+
       <View style={styles.promoSection}>
         <Text style={styles.sectionTitle}>{t('promo_code')}</Text>
 
@@ -561,7 +560,7 @@ const CartScreen = () => {
         )}
       </View>
 
-      {/* Summary Section */}
+
       <View style={styles.summarySection}>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>{t('subtotal')}</Text>
@@ -583,7 +582,7 @@ const CartScreen = () => {
         </View>
       </View>
 
-      {/* Checkout Button */}
+
       <View style={styles.checkoutContainer}>
         <TouchableOpacity style={styles.checkoutButton}>
           <Text style={styles.checkoutButtonText}>{t('checkout')}</Text>

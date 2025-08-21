@@ -31,24 +31,23 @@ const WishlistScreen = () => {
   const favoriteIds = useSelector((state: RootState) => state.favorites.favoriteIds);
   const [refreshing, setRefreshing] = useState(false);
 
-  // Clear navigation cache when screen comes into focus
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Wishlist focused - clearing navigation cache');
-      // Clear any nested navigation stack to ensure we're at the root
-      // Note: popToTop is not available in this context
+
     });
 
     return unsubscribe;
   }, [navigation]);
 
-  // Fetch all products to filter favorites
+
   const { data: allProducts, isLoading, refetch } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
   });
 
-  // Filter products to show only favorites
+
   const favoriteProducts = allProducts?.filter(product => 
     favoriteIds.includes(product.id)
   ) || [];
@@ -59,7 +58,7 @@ const WishlistScreen = () => {
   }, [refetch]);
 
   const handleProductPress = (product: Product) => {
-    // Navigate to product details (you can implement navigation here)
+
     console.log('Navigate to product:', product.id);
   };
 
@@ -229,7 +228,7 @@ const WishlistScreen = () => {
           icon="heart-outline"
           actionText={t('browse_products')}
           onAction={() => {
-            // Navigate to products tab and reset navigation
+
             navigation.navigate('Products' as never);
           }}
         />
@@ -278,7 +277,7 @@ const WishlistScreen = () => {
         ListEmptyComponent={
           refreshing ? (
             <>
-              {/* Search Bar Skeleton for Refresh */}
+
               <View style={styles.skeletonSearchContainer}>
                 <View style={styles.skeletonSearchBar}>
                   <View style={styles.skeletonSearchIcon} />
@@ -288,7 +287,7 @@ const WishlistScreen = () => {
               </View>
               
               <View style={styles.skeletonGrid}>
-                {/* First Skeleton Item */}
+
                 <View style={styles.skeletonWishlistItem}>
                   <View style={styles.skeletonCard}>
                     <Loader height={200} />
@@ -302,7 +301,7 @@ const WishlistScreen = () => {
                     </View>
                   </View>
                 </View>
-                {/* Second Skeleton Item */}
+
                 <View style={styles.skeletonWishlistItem}>
                   <View style={styles.skeletonCard}>
                     <Loader height={200} />

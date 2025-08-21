@@ -28,7 +28,7 @@ const CartClearAllButton = () => {
     );
   };
 
-  // Don't show button if cart is empty
+
   if (cartItems.length === 0) {
     return null;
   }

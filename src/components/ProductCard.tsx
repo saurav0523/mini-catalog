@@ -24,7 +24,7 @@ interface ProductCardProps {
 }
 
 const { width } = Dimensions.get('window');
-const cardWidth = (width - 48) / 2; // 2 columns with margins
+const cardWidth = (width - 48) / 2;
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
   const { t } = useTranslation();
@@ -59,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
   const handleFavoriteToggle = () => {
     dispatch(toggleFavorite(product.id));
     
-    // Haptic feedback for favorite toggle
+    
     if (isFavorite) {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     } else {
@@ -69,7 +69,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
 
   const handleAddToCart = () => {
     if (isInCart) {
-      // If already in cart, increase quantity
       dispatch(
         updateQuantity({
           id: product.id,
@@ -77,10 +76,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
         })
       );
       
-      // Haptic feedback for quantity increase
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } else {
-      // If not in cart, add new item
       dispatch(
         addToCart({
           id: product.id,
@@ -91,10 +88,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
         })
       );
       
-      // Haptic feedback for adding new item
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       
-      // Button transition animation
       Animated.sequence([
         Animated.timing(buttonAnim, {
           toValue: 0.8,

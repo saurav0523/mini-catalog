@@ -7,7 +7,7 @@ interface QuantityStepperProps {
   onQuantityChange: (quantity: number) => void;
   minQuantity?: number;
   maxQuantity?: number;
-  onMinusClick?: () => void; // Custom handler for minus button at minimum
+  onMinusClick?: () => void;
 }
 
 const QuantityStepper: React.FC<QuantityStepperProps> = ({
@@ -21,7 +21,7 @@ const QuantityStepper: React.FC<QuantityStepperProps> = ({
     if (quantity > minQuantity) {
       onQuantityChange(quantity - 1);
     } else if (onMinusClick) {
-      // When quantity reaches minimum, call custom handler
+      
       onMinusClick();
     }
   };
