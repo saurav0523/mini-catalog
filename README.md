@@ -1,8 +1,8 @@
-# 🛍️ Mini Catalog App
+# Mini Catalog App
 
 A production-ready React Native mobile application demonstrating modern mobile development fundamentals including navigation, state management, API integration, forms & validation, offline handling, RTL/i18n, testing, and CI/CD.
 
-## 📱 App Overview
+## App Overview
 
 **Mini Catalog** is a 3-screen e-commerce app that allows users to:
 
@@ -13,9 +13,9 @@ A production-ready React Native mobile application demonstrating modern mobile d
 - Apply promo codes for discounts
 - Switch between English and Arabic languages with RTL support
 
-## ✨ Features Implemented
+## Features Implemented
 
-### ✅ Core Requirements (Must-Have)
+### Core Requirements (Must-Have)
 
 - **Tech Stack**: React Native 0.79+ with TypeScript, Expo SDK 53
 - **Navigation**: React Navigation with stack + bottom tabs
@@ -25,39 +25,39 @@ A production-ready React Native mobile application demonstrating modern mobile d
 - **Storage**: AsyncStorage for cart & favorites persistence
 - **Linting/Formatting**: ESLint + Prettier + Husky (pre-commit)
 
-### 🎯 Screens
+### Screens
 
 1. **Product List**: Grid layout with search, pull-to-refresh, shimmer loaders
 2. **Product Details**: Image display, description, quantity stepper, add to cart
 3. **Cart**: Item management, quantity updates, promo codes, total calculation
 
-### 🌍 Internationalization
+### Internationalization
 
 - **Languages**: English + Arabic
 - **RTL Support**: Proper layout mirroring for Arabic
 - **Language Toggle**: Easy switching between languages
 - **Currency**: USD formatting (easily configurable to AED)
 
-### 🔄 Offline & Resilience
+### Offline & Resilience
 
 - **Product Caching**: Last fetched products available offline
 - **State Persistence**: Cart and favorites survive app restarts
 - **Error Handling**: Graceful fallbacks and retry mechanisms
 - **Loading States**: Skeleton loaders and shimmer effects
 
-### 🧪 Testing
+### Testing
 
 - **Unit Tests**: 5+ tests covering Redux reducers
 - **UI Tests**: 2+ tests for core user interactions
 - **Coverage**: Jest configuration with coverage reporting
 
-### 🚀 CI/CD
+### CI/CD
 
 - **GitHub Actions**: Automated testing on PRs
 - **Quality Gates**: Linting, formatting, and test checks
 - **Pre-commit Hooks**: Local validation before commits
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Project Structure
 
@@ -87,7 +87,7 @@ src/
 3. **UI**: React components with hooks
 4. **Persistence**: AsyncStorage for offline data
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -144,7 +144,7 @@ npm run test:coverage # Run tests with coverage
 npm run build:android # Build Android APK
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
@@ -165,7 +165,7 @@ npm run test:coverage
 - **UI Tests**: Component interactions, user flows
 - **Coverage Target**: >80% code coverage
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -187,7 +187,7 @@ Language files are located in `src/i18n/`:
 
 Customize colors, typography, and spacing in `src/theme/`.
 
-## 📱 Building for Production
+## Building for Production
 
 ### Android Build
 
@@ -212,7 +212,7 @@ eas build -p android --profile preview
 eas build -p ios --profile preview
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Expo Updates
 
@@ -229,12 +229,8 @@ eas submit -p ios
 eas submit -p android
 ```
 
-## 📊 Performance & Optimization
+##  Performance & Optimization
 
-### Bundle Size
-
-- **Android**: ~15MB APK
-- **iOS**: ~25MB IPA
 
 ### Performance Metrics
 
@@ -242,7 +238,7 @@ eas submit -p android
 - **Screen Transitions**: <300ms
 - **Image Loading**: Lazy loading with placeholders
 
-## 🔒 Security
+##  Security
 
 ### Data Protection
 
@@ -251,13 +247,8 @@ eas submit -p android
 - **Input Validation**: Yup schema validation
 - **Error Handling**: No sensitive data in logs
 
-## 🌐 Browser Support
 
-- **iOS**: iOS 13+
-- **Android**: Android 8+
-- **Web**: Chrome 80+, Safari 13+, Firefox 75+
-
-## 🤝 Contributing
+##  Contributing
 
 ### Development Workflow
 
@@ -274,55 +265,16 @@ eas submit -p android
 - **Prettier**: Consistent formatting
 - **Husky**: Pre-commit validation
 
-## 📝 Changelog
+##  Changelog
 
 ### v1.0.0 (Current)
 
-- ✅ Core app functionality
-- ✅ Redux state management
-- ✅ i18n with RTL support
-- ✅ Offline capabilities
-- ✅ Comprehensive testing
-- ✅ CI/CD pipeline
+-  Core app functionality
+-  Redux state management
+-  i18n with RTL support
+-  Offline capabilities
+-  Comprehensive testing
+-  CI/CD pipeline
 
-## 🐛 Known Issues
 
-- RTL layout forcing removed for Expo compatibility
-- Some iOS-specific animations may differ on Android
 
-## 🔮 Roadmap
-
-### v1.1.0 (Next Release)
-
-- [ ] Dark mode support
-- [ ] Advanced search & filtering
-- [ ] Deep linking
-- [ ] Analytics integration
-- [ ] Performance optimizations
-
-### v1.2.0 (Future)
-
-- [ ] Push notifications
-- [ ] User authentication
-- [ ] Payment integration
-- [ ] Social sharing
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/your-repo/issues)
-- **Documentation**: [Wiki](https://github.com/your-repo/wiki)
-- **Email**: support@yourcompany.com
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Expo Team**: For the amazing development platform
-- **React Native Community**: For excellent libraries and tools
-- **Contributors**: All who helped improve this project
-
----
-
-**Built with ❤️ using React Native & Expo**
