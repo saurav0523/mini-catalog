@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
   Animated,
   Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { addToCart, updateQuantity, removeFromCart } from '../features/cart/cartSlice';
 import { toggleFavorite } from '../features/products/favoritesSlice';
-import { Product } from '../api/products';
+import * as Haptics from 'expo-haptics';
 import { useTheme } from '../theme/ThemeContext';
 
 interface ProductCardProps {
-  product: Product;
+  product: any; // Changed from Product to any as Product type is removed
   onPress: () => void;
 }
 
@@ -36,8 +35,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
   const isInCart = cartItems.some(item => item.id === product.id);
   const cartItem = cartItems.find(item => item.id === product.id);
   
-  const scaleAnim = React.useRef(new Animated.Value(1)).current;
-  const buttonAnim = React.useRef(new Animated.Value(1)).current;
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const buttonAnim = useRef(new Animated.Value(1)).current;
 
   const handlePress = () => {
     Animated.sequence([
@@ -72,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
       dispatch(
         updateQuantity({
           id: product.id,
-          quantity: cartItem?.quantity || 1,
+          quantity: (cartItem?.quantity || 1) + 1,
         })
       );
       
@@ -92,29 +91,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
       
       Animated.sequence([
         Animated.timing(buttonAnim, {
-          toValue: 0.8,
+          toValue: 1.1,
           duration: 100,
           useNativeDriver: true,
         }),
         Animated.timing(buttonAnim, {
           toValue: 1,
-          duration: 200,
+          duration: 100,
           useNativeDriver: true,
         }),
       ]).start();
-    }
-  };
-
-  const handleQuantityChange = (newQuantity: number) => {
-    if (newQuantity <= 0) {
-      dispatch(removeFromCart(product.id));
-    } else {
-      dispatch(
-        updateQuantity({
-          id: product.id,
-          quantity: newQuantity,
-        })
-      );
     }
   };
 

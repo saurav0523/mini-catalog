@@ -16,12 +16,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { toggleFavorite } from './favoritesSlice';
 import { addToCart } from '../cart/cartSlice';
-import ProductCard from '../../components/ProductCard';
+import WishlistCard from '../../components/WishlistCard';
 import EmptyState from '../../components/EmptyState';
 import { Product } from '../../api/products';
 import { fetchProducts } from '../../api/products';
 import Loader from '../../components/Loader';
 import { useTheme } from '../../theme/ThemeContext';
+import * as Haptics from 'expo-haptics';
 
 const WishlistScreen = () => {
   const { t } = useTranslation();
@@ -58,8 +59,7 @@ const WishlistScreen = () => {
   }, [refetch]);
 
   const handleProductPress = (product: Product) => {
-
-    console.log('Navigate to product:', product.id);
+    navigation.navigate('ProductDetails' as never, { product } as never);
   };
 
   const handleAddToCart = (product: Product) => {
@@ -72,6 +72,8 @@ const WishlistScreen = () => {
         quantity: 1,
       })
     );
+    // Provide subtle haptic feedback
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
   };
 
   const handleRemoveFromWishlist = (productId: string) => {
@@ -96,50 +98,6 @@ const WishlistScreen = () => {
     },
     listContainer: {
       padding: 16,
-    },
-    wishlistItem: {
-      marginBottom: 16,
-      backgroundColor: theme.colors.card,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: theme.colors.cardBorder,
-      shadowColor: theme.colors.text,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: isDark ? 0.3 : 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
-    itemActions: {
-      flexDirection: 'row',
-      padding: 16,
-      borderTopWidth: 1,
-      borderTopColor: theme.colors.border,
-    },
-    actionButton: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: 12,
-      paddingHorizontal: 16,
-      borderRadius: 8,
-      marginHorizontal: 4,
-      backgroundColor: theme.colors.surface,
-      borderWidth: 1,
-      borderColor: theme.colors.border,
-    },
-    actionButtonText: {
-      fontSize: 14,
-      fontWeight: '600',
-      color: theme.colors.primary,
-      marginLeft: 8,
-    },
-    removeButton: {
-      backgroundColor: theme.colors.surface,
-      borderColor: theme.colors.error,
-    },
-    removeButtonText: {
-      color: theme.colors.error,
     },
     skeletonSearchContainer: {
       paddingHorizontal: 16,
@@ -187,24 +145,23 @@ const WishlistScreen = () => {
       borderRadius: 12,
       borderWidth: 1,
       borderColor: theme.colors.cardBorder,
+      overflow: 'hidden',
     },
     skeletonCard: {
-      height: 200,
+      height: 140,
       backgroundColor: theme.colors.surfaceVariant,
       borderRadius: 12,
     },
     skeletonActions: {
       flexDirection: 'row',
       padding: 16,
-      borderTopWidth: 1,
-      borderTopColor: theme.colors.border,
+      gap: 12,
     },
     skeletonActionButton: {
       flex: 1,
       height: 40,
       backgroundColor: theme.colors.divider,
       borderRadius: 8,
-      marginHorizontal: 4,
     },
   });
 
@@ -242,31 +199,12 @@ const WishlistScreen = () => {
         data={refreshing ? [] : favoriteProducts}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <View style={styles.wishlistItem}>
-            <ProductCard
-              product={item}
-              onPress={() => handleProductPress(item)}
-            />
-            <View style={styles.itemActions}>
-              <TouchableOpacity
-                style={styles.actionButton}
-                onPress={() => handleAddToCart(item)}
-              >
-                <Ionicons name="cart-outline" size={20} color="#007AFF" />
-                <Text style={styles.actionButtonText}>Add to Cart</Text>
-              </TouchableOpacity>
-              
-              <TouchableOpacity
-                style={[styles.actionButton, styles.removeButton]}
-                onPress={() => handleRemoveFromWishlist(item.id)}
-              >
-                <Ionicons name="trash-outline" size={20} color="#FF3B30" />
-                <Text style={[styles.actionButtonText, styles.removeButtonText]}>
-                  Remove
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          <WishlistCard
+            product={item}
+            onPress={() => handleProductPress(item)}
+            onAddToCart={() => handleAddToCart(item)}
+            onRemoveFromWishlist={() => handleRemoveFromWishlist(item.id)}
+          />
         )}
         numColumns={1}
         contentContainerStyle={styles.listContainer}
@@ -290,7 +228,7 @@ const WishlistScreen = () => {
 
                 <View style={styles.skeletonWishlistItem}>
                   <View style={styles.skeletonCard}>
-                    <Loader height={200} />
+                    <Loader height={140} />
                   </View>
                   <View style={styles.skeletonActions}>
                     <View style={styles.skeletonActionButton}>
@@ -304,7 +242,7 @@ const WishlistScreen = () => {
 
                 <View style={styles.skeletonWishlistItem}>
                   <View style={styles.skeletonCard}>
-                    <Loader height={200} />
+                    <Loader height={140} />
                   </View>
                   <View style={styles.skeletonActions}>
                     <View style={styles.skeletonActionButton}>

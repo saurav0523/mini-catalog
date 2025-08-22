@@ -18,7 +18,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { removeFromCart, updateQuantity, clearCart } from './cartSlice';
+import { removeFromCart, updateQuantity } from './cartSlice';
 import QuantityStepper from '../../components/QuantityStepper';
 import EmptyState from '../../components/EmptyState';
 import Loader from '../../components/Loader';
@@ -39,7 +39,7 @@ const CartScreen = () => {
   const { t } = useTranslation();
   const { theme, isDark } = useTheme();
   const dispatch = useDispatch();
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const subtotal = useSelector((state: RootState) => state.cart.total);
   const [appliedPromo, setAppliedPromo] = useState(false);

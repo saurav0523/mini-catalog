@@ -1,27 +1,13 @@
 module.exports = {
   root: true,
-  extends: ['eslint:recommended'],
-  parser: '@babel/eslint-parser',
-  parserOptions: {
-    requireConfigFile: false,
-    babelOptions: {
-      presets: ['@babel/preset-react', '@babel/preset-typescript'],
-    },
-  },
+  extends: [
+    '@react-native/eslint-config'
+  ],
   rules: {
-    'no-unused-vars': 'warn',
-    'prefer-const': 'error',
-    'no-var': 'error',
-  },
-  env: {
-    es6: true,
-    node: true,
-    jest: true,
-    browser: true,
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
   },
 };
