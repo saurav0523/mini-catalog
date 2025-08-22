@@ -12,7 +12,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { addToCart, updateQuantity, removeFromCart } from '../features/cart/cartSlice';
+import {
+  addToCart,
+  updateQuantity,
+  removeFromCart,
+} from '../features/cart/cartSlice';
 import { toggleFavorite } from '../features/products/favoritesSlice';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '../theme/ThemeContext';
@@ -29,12 +33,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
   const { t } = useTranslation();
   const { theme, isDark } = useTheme();
   const dispatch = useDispatch();
-  const favorites = useSelector((state: RootState) => state.favorites.favoriteIds);
+  const favorites = useSelector(
+    (state: RootState) => state.favorites.favoriteIds
+  );
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const isFavorite = favorites.includes(product.id);
   const isInCart = cartItems.some(item => item.id === product.id);
   const cartItem = cartItems.find(item => item.id === product.id);
-  
+
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const buttonAnim = useRef(new Animated.Value(1)).current;
 
@@ -51,14 +57,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
         useNativeDriver: true,
       }),
     ]).start();
-    
+
     onPress();
   };
 
   const handleFavoriteToggle = () => {
     dispatch(toggleFavorite(product.id));
-    
-    
+
     if (isFavorite) {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     } else {
@@ -74,7 +79,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
           quantity: (cartItem?.quantity || 1) + 1,
         })
       );
-      
+
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } else {
       dispatch(
@@ -86,9 +91,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
           quantity: 1,
         })
       );
-      
+
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      
+
       Animated.sequence([
         Animated.timing(buttonAnim, {
           toValue: 1.1,
@@ -249,7 +254,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
       onPress={handlePress}
       testID="product-card"
     >
-      <Animated.View style={[styles.imageContainer, { transform: [{ scale: scaleAnim }] }]}>
+      <Animated.View
+        style={[styles.imageContainer, { transform: [{ scale: scaleAnim }] }]}
+      >
         <Image source={{ uri: product.image }} style={styles.image} />
         <TouchableOpacity
           style={styles.favoriteButton}
@@ -281,23 +288,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
           <Text style={styles.price}>${product.price.toFixed(2)}</Text>
         </View>
 
-        <TouchableOpacity 
-          style={[
-            styles.addButton, 
-            isInCart && styles.addButtonInCart
-          ]} 
+        <TouchableOpacity
+          style={[styles.addButton, isInCart && styles.addButtonInCart]}
           onPress={handleAddToCart}
         >
           <Animated.View style={{ transform: [{ scale: buttonAnim }] }}>
             {isInCart ? (
               <View style={styles.quantityContainer}>
                 <TouchableOpacity
-                  style={[
-                    styles.quantityButton,
-                  ]}
+                  style={[styles.quantityButton]}
                   onPress={() => {
                     if (cartItem && cartItem.quantity > 1) {
-                      dispatch(updateQuantity({ id: product.id, quantity: cartItem.quantity - 1 }));
+                      dispatch(
+                        updateQuantity({
+                          id: product.id,
+                          quantity: cartItem.quantity - 1,
+                        })
+                      );
                       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                     } else if (cartItem && cartItem.quantity === 1) {
                       dispatch(removeFromCart(product.id));
@@ -305,38 +312,41 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onPress }) => {
                     }
                   }}
                 >
-                  <Ionicons 
-                    name="remove" 
-                    size={16} 
+                  <Ionicons
+                    name="remove"
+                    size={16}
                     color={theme.colors.onPrimary}
                   />
                 </TouchableOpacity>
-                
-                <Text style={styles.quantityText}>{cartItem?.quantity || 1}</Text>
-                
+
+                <Text style={styles.quantityText}>
+                  {cartItem?.quantity || 1}
+                </Text>
+
                 <TouchableOpacity
-                  style={[
-                    styles.quantityButton,
-                  ]}
+                  style={[styles.quantityButton]}
                   onPress={() => {
                     if (cartItem && cartItem.quantity < 99) {
-                      dispatch(updateQuantity({ id: product.id, quantity: cartItem.quantity + 1 }));
+                      dispatch(
+                        updateQuantity({
+                          id: product.id,
+                          quantity: cartItem.quantity + 1,
+                        })
+                      );
                       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                     }
                   }}
                 >
-                  <Ionicons 
-                    name="add" 
-                    size={16} 
-                    color={theme.colors.onPrimary} 
+                  <Ionicons
+                    name="add"
+                    size={16}
+                    color={theme.colors.onPrimary}
                   />
                 </TouchableOpacity>
               </View>
             ) : (
               <>
-                <Text style={styles.addButtonText}>
-                  {t('add_to_cart')}
-                </Text>
+                <Text style={styles.addButtonText}>{t('add_to_cart')}</Text>
               </>
             )}
           </Animated.View>

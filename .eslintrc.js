@@ -1,8 +1,6 @@
 module.exports = {
   root: true,
-  extends: [
-    '@react-native/eslint-config'
-  ],
+  extends: ['@react-native/eslint-config'],
   rules: {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',

@@ -46,19 +46,22 @@ const ProductDetailsScreen = () => {
   const [quantity, setQuantity] = useState(1);
   const [showQuantity, setShowQuantity] = useState(false);
 
-
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const existingCartItem = cartItems.find((item: any) => item.id === product.id);
+  const existingCartItem = cartItems.find(
+    (item: any) => item.id === product.id
+  );
   const isInCart = !!existingCartItem;
-
 
   React.useEffect(() => {
     console.log('useEffect running - cartItems:', cartItems);
     console.log('existingCartItem:', existingCartItem);
     console.log('isInCart:', isInCart);
-    
+
     if (isInCart && existingCartItem) {
-      console.log('Setting quantity stepper visible with quantity:', existingCartItem.quantity);
+      console.log(
+        'Setting quantity stepper visible with quantity:',
+        existingCartItem.quantity
+      );
       setShowQuantity(true);
       setQuantity(existingCartItem.quantity);
     } else {
@@ -68,14 +71,15 @@ const ProductDetailsScreen = () => {
     }
   }, [cartItems, existingCartItem, isInCart]);
 
-
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Screen focused - updating cart state');
 
       const currentCartItems = store.getState().cart.items;
-      const currentCartItem = currentCartItems.find((item: any) => item.id === product.id);
-      
+      const currentCartItem = currentCartItems.find(
+        (item: any) => item.id === product.id
+      );
+
       if (currentCartItem) {
         console.log('Product found in cart, showing quantity stepper');
         setShowQuantity(true);
@@ -90,7 +94,6 @@ const ProductDetailsScreen = () => {
     return unsubscribe;
   }, [navigation, product.id]);
 
-
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
       console.log('Screen blurred - clearing navigation state');
@@ -104,7 +107,6 @@ const ProductDetailsScreen = () => {
 
   const handleAddToCart = () => {
     console.log('handleAddToCart clicked, product:', product.id);
-    
 
     if (isInCart && existingCartItem) {
       console.log('Product already in cart, showing quantity stepper');
@@ -128,12 +130,10 @@ const ProductDetailsScreen = () => {
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity <= 0) {
-
       dispatch(removeFromCart(product.id));
       setShowQuantity(false);
       setQuantity(1);
     } else {
-
       dispatch(updateQuantity({ id: product.id, quantity: newQuantity }));
       setQuantity(newQuantity);
     }
@@ -141,34 +141,28 @@ const ProductDetailsScreen = () => {
 
   const handleConfirmAddToCart = () => {
     console.log('handleConfirmAddToCart called');
-    
-    if (isInCart) {
 
+    if (isInCart) {
       dispatch(updateQuantity({ id: product.id, quantity }));
     } else {
-
       dispatch(addToCart({ ...product, quantity }));
     }
-    
 
     setShowQuantity(false);
     setQuantity(1);
-    
-    
+
     try {
-      
       navigation.reset({
         index: 0,
         routes: [{ name: 'ProductList' }],
       });
-      
-      
+
       setTimeout(() => {
         navigation.navigate('Cart' as never);
       }, 100);
     } catch (error) {
       console.log('Navigation reset failed, using fallback:', error);
-      
+
       navigation.navigate('Cart' as never);
     }
   };
@@ -310,12 +304,10 @@ const ProductDetailsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        
         <View style={styles.imageContainer}>
           <Image source={{ uri: product.image }} style={styles.image} />
         </View>
 
-        
         <View style={styles.content}>
           <Text style={styles.name}>{product.name}</Text>
 
@@ -341,7 +333,6 @@ const ProductDetailsScreen = () => {
 
           <Text style={styles.description}>{product.description}</Text>
 
-          
           {showQuantity && (
             <View style={styles.quantitySection}>
               <Text style={styles.quantityLabel}>Quantity</Text>
@@ -355,18 +346,17 @@ const ProductDetailsScreen = () => {
             </View>
           )}
 
-            
           <TouchableOpacity
             style={[
               styles.addToCartButton,
-              showQuantity && styles.confirmButton
+              showQuantity && styles.confirmButton,
             ]}
             onPress={showQuantity ? handleConfirmAddToCart : handleAddToCart}
             activeOpacity={0.7}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <Ionicons
-              name={showQuantity ? "cart" : "cart-outline"}
+              name={showQuantity ? 'cart' : 'cart-outline'}
               size={20}
               color="white"
               style={styles.cartIcon}

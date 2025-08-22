@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,9 @@ import {
   Alert,
   Image,
   RefreshControl,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -45,12 +48,12 @@ const CartScreen = () => {
   const [appliedPromo, setAppliedPromo] = useState(false);
   const [discount, setDiscount] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
-
+  const flatListRef = useRef<FlatList>(null);
+  const promoInputRef = useRef<TextInput>(null);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Cart focused - clearing navigation cache');
-
     });
 
     return unsubscribe;
@@ -61,7 +64,6 @@ const CartScreen = () => {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
@@ -81,10 +83,8 @@ const CartScreen = () => {
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     if (newQuantity <= 0) {
-
       dispatch(removeFromCart(itemId));
     } else {
-
       dispatch(updateQuantity({ id: itemId, quantity: newQuantity }));
     }
   };
@@ -100,7 +100,7 @@ const CartScreen = () => {
         return;
       }
 
-      const discountAmount = subtotal * 0.1; 
+      const discountAmount = subtotal * 0.1;
       setDiscount(discountAmount);
       setAppliedPromo(true);
       reset();
@@ -126,8 +126,15 @@ const CartScreen = () => {
       flex: 1,
       backgroundColor: theme.colors.background,
     },
+    keyboardAvoidingView: {
+      flex: 1,
+    },
+    scrollContainer: {
+      flex: 1,
+    },
     listContainer: {
       padding: 16,
+      paddingBottom: 8,
     },
     cartItem: {
       flexDirection: 'row',
@@ -353,49 +360,52 @@ const CartScreen = () => {
       borderRadius: 8,
     },
     skeletonSearchContainer: {
-      marginBottom: 12,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      backgroundColor: theme.colors.surface,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.border,
     },
     skeletonSearchBar: {
       flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: theme.colors.inputBackground,
-      borderRadius: 8,
-      paddingHorizontal: 12,
-      paddingVertical: 8,
+      borderRadius: 12,
       borderWidth: 1,
       borderColor: theme.colors.inputBorder,
+      paddingHorizontal: 12,
+      height: 40,
     },
     skeletonSearchIcon: {
       width: 20,
       height: 20,
-      backgroundColor: theme.colors.divider,
       borderRadius: 10,
-      marginRight: 10,
+      backgroundColor: theme.colors.divider,
+      marginRight: 8,
     },
     skeletonSearchInput: {
       flex: 1,
-      height: 20,
+      height: 16,
       backgroundColor: theme.colors.divider,
-      borderRadius: 4,
+      borderRadius: 8,
     },
     skeletonClearButton: {
       width: 20,
       height: 20,
-      backgroundColor: theme.colors.divider,
       borderRadius: 10,
+      backgroundColor: theme.colors.divider,
+      marginLeft: 8,
     },
   });
 
   const renderCartItem = ({ item }: { item: any }) => (
     <View style={styles.cartItem}>
       <Image source={{ uri: item.image }} style={styles.itemImage} />
-
       <View style={styles.itemContent}>
         <Text style={styles.itemName} numberOfLines={2}>
           {item.name}
         </Text>
         <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
-
         <View style={styles.itemActions}>
           <QuantityStepper
             quantity={item.quantity}
@@ -411,7 +421,11 @@ const CartScreen = () => {
             style={styles.removeButton}
             onPress={() => handleRemoveItem(item.id)}
           >
-            <Ionicons name="trash-outline" size={20} color={theme.colors.error} />
+            <Ionicons
+              name="trash-outline"
+              size={20}
+              color={theme.colors.error}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -432,166 +446,177 @@ const CartScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={refreshing ? [] : cartItems}
-        renderItem={renderCartItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContainer}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl 
-            refreshing={refreshing} 
-            onRefresh={onRefresh}
-            colors={[theme.colors.primary]}
-            tintColor={theme.colors.primary}
-          />
-        }
-        ListEmptyComponent={
-          refreshing ? (
-            <>
-
-              <View style={styles.skeletonSearchContainer}>
-                <View style={styles.skeletonSearchBar}>
-                  <View style={styles.skeletonSearchIcon} />
-                  <View style={styles.skeletonSearchInput} />
-                  <View style={styles.skeletonClearButton} />
-                </View>
-              </View>
-              
-              <View style={styles.skeletonGrid}>
-
-                <View style={styles.skeletonCartItem}>
-                  <View style={styles.skeletonItemImage}>
-                    <Loader height={80} />
-                  </View>
-                  <View style={styles.skeletonItemContent}>
-                    <View style={styles.skeletonItemName}>
-                      <Loader height={20} />
-                    </View>
-                    <View style={styles.skeletonItemPrice}>
-                      <Loader height={18} />
-                    </View>
-                    <View style={styles.skeletonItemActions}>
-                      <View style={styles.skeletonQuantityStepper}>
-                        <Loader height={40} />
-                      </View>
-                      <View style={styles.skeletonRemoveButton}>
-                        <Loader height={40} />
-                      </View>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={styles.skeletonCartItem}>
-                  <View style={styles.skeletonItemImage}>
-                    <Loader height={80} />
-                  </View>
-                  <View style={styles.skeletonItemContent}>
-                    <View style={styles.skeletonItemName}>
-                      <Loader height={20} />
-                    </View>
-                    <View style={styles.skeletonItemPrice}>
-                      <Loader height={18} />
-                    </View>
-                    <View style={styles.skeletonItemActions}>
-                      <View style={styles.skeletonQuantityStepper}>
-                        <Loader height={40} />
-                      </View>
-                      <View style={styles.skeletonRemoveButton}>
-                        <Loader height={40} />
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </>
-          ) : null
-        }
-      />
-
-
-      <View style={styles.promoSection}>
-        <Text style={styles.sectionTitle}>{t('promo_code')}</Text>
-
-        <Controller
-          control={control}
-          name="promoCode"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <View style={styles.promoInputContainer}>
-              <TextInput
-                style={[
-                  styles.promoInput,
-                  errors.promoCode && styles.promoInputError,
-                ]}
-                placeholder="Enter promo code (try SAVE10)"
-                placeholderTextColor={theme.colors.textSecondary}
-                value={value}
-                onChangeText={onChange}
-                onBlur={onBlur}
-                editable={!appliedPromo}
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoidingView}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+      >
+        <ScrollView
+          style={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ flexGrow: 1 }}
+        >
+          <FlatList
+            ref={flatListRef}
+            data={refreshing ? [] : cartItems}
+            renderItem={renderCartItem}
+            keyExtractor={item => item.id}
+            contentContainerStyle={styles.listContainer}
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                colors={[theme.colors.primary]}
+                tintColor={theme.colors.primary}
               />
-              {!appliedPromo ? (
-                <TouchableOpacity
-                  style={styles.applyButton}
-                  onPress={handleSubmit(onSubmitPromo)}
-                >
-                  <Text style={styles.applyButtonText}>{t('apply')}</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={styles.removePromoButton}
-                  onPress={handleRemovePromo}
-                >
-                  <Text style={styles.removePromoButtonText}>Remove</Text>
-                </TouchableOpacity>
+            }
+            ListEmptyComponent={
+              refreshing ? (
+                <>
+                  <View style={styles.skeletonSearchContainer}>
+                    <View style={styles.skeletonSearchBar}>
+                      <View style={styles.skeletonSearchIcon} />
+                      <View style={styles.skeletonSearchInput} />
+                      <View style={styles.skeletonClearButton} />
+                    </View>
+                  </View>
+
+                  <View style={styles.skeletonGrid}>
+                    <View style={styles.skeletonCartItem}>
+                      <View style={styles.skeletonItemImage}>
+                        <Loader height={80} />
+                      </View>
+                      <View style={styles.skeletonItemContent}>
+                        <View style={styles.skeletonItemName}>
+                          <Loader height={20} />
+                        </View>
+                        <View style={styles.skeletonItemPrice}>
+                          <Loader height={18} />
+                        </View>
+                        <View style={styles.skeletonItemActions}>
+                          <View style={styles.skeletonQuantityStepper}>
+                            <Loader height={40} />
+                          </View>
+                          <View style={styles.skeletonRemoveButton}>
+                            <Loader height={40} />
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+
+                    <View style={styles.skeletonCartItem}>
+                      <View style={styles.skeletonItemImage}>
+                        <Loader height={80} />
+                      </View>
+                      <View style={styles.skeletonItemContent}>
+                        <View style={styles.skeletonItemName}>
+                          <Loader height={20} />
+                        </View>
+                        <View style={styles.skeletonItemPrice}>
+                          <Loader height={18} />
+                        </View>
+                        <View style={styles.skeletonItemActions}>
+                          <View style={styles.skeletonQuantityStepper}>
+                            <Loader height={40} />
+                          </View>
+                          <View style={styles.skeletonRemoveButton}>
+                            <Loader height={40} />
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </>
+              ) : null
+            }
+          />
+
+          <View style={styles.promoSection}>
+            <Text style={styles.sectionTitle}>{t('promo_code')}</Text>
+
+            <Controller
+              control={control}
+              name="promoCode"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View style={styles.promoInputContainer}>
+                  <TextInput
+                    ref={promoInputRef}
+                    style={[
+                      styles.promoInput,
+                      errors.promoCode && styles.promoInputError,
+                    ]}
+                    placeholder="Enter promo code (try SAVE10)"
+                    placeholderTextColor={theme.colors.textSecondary}
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    editable={!appliedPromo}
+                    returnKeyType="done"
+                    onSubmitEditing={handleSubmit(onSubmitPromo)}
+                  />
+                  {!appliedPromo ? (
+                    <TouchableOpacity
+                      style={styles.applyButton}
+                      onPress={handleSubmit(onSubmitPromo)}
+                    >
+                      <Text style={styles.applyButtonText}>{t('apply')}</Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      style={styles.removePromoButton}
+                      onPress={handleRemovePromo}
+                    >
+                      <Text style={styles.removePromoButtonText}>Remove</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
               )}
-            </View>
-          )}
-        />
+            />
 
-        {errors.promoCode && (
-          <Text style={styles.errorText}>{errors.promoCode.message}</Text>
-        )}
+            {errors.promoCode && (
+              <Text style={styles.errorText}>{errors.promoCode.message}</Text>
+            )}
 
-        {appliedPromo && (
-          <Text style={styles.promoApplied}>
-            Promo code SAVE10 applied! 10% discount: -${discount.toFixed(2)}
-          </Text>
-        )}
-      </View>
-
-
-      <View style={styles.summarySection}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>{t('subtotal')}</Text>
-          <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
-        </View>
-
-        {discount > 0 && (
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>{t('discount')}</Text>
-            <Text style={styles.summaryValueDiscount}>
-              -${discount.toFixed(2)}
-            </Text>
+            {appliedPromo && (
+              <Text style={styles.promoApplied}>
+                Promo code SAVE10 applied! 10% discount: -${discount.toFixed(2)}
+              </Text>
+            )}
           </View>
-        )}
 
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>{t('total')}</Text>
-          <Text style={styles.summaryTotal}>${total.toFixed(2)}</Text>
-        </View>
-      </View>
+          <View style={styles.summarySection}>
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>{t('subtotal')}</Text>
+              <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
+            </View>
 
+            {discount > 0 && (
+              <View style={styles.summaryRow}>
+                <Text style={styles.summaryLabel}>{t('discount')}</Text>
+                <Text style={styles.summaryValueDiscount}>
+                  -${discount.toFixed(2)}
+                </Text>
+              </View>
+            )}
 
-      <View style={styles.checkoutContainer}>
-        <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutButtonText}>{t('checkout')}</Text>
-        </TouchableOpacity>
-      </View>
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>{t('total')}</Text>
+              <Text style={styles.summaryTotal}>${total.toFixed(2)}</Text>
+            </View>
+          </View>
+
+          <View style={styles.checkoutContainer}>
+            <TouchableOpacity style={styles.checkoutButton}>
+              <Text style={styles.checkoutButtonText}>{t('checkout')}</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
-
-
 
 export default CartScreen;

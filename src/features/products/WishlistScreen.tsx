@@ -29,29 +29,30 @@ const WishlistScreen = () => {
   const { theme, isDark } = useTheme();
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
-  const favoriteIds = useSelector((state: RootState) => state.favorites.favoriteIds);
+  const favoriteIds = useSelector(
+    (state: RootState) => state.favorites.favoriteIds
+  );
   const [refreshing, setRefreshing] = useState(false);
-
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Wishlist focused - clearing navigation cache');
-
     });
 
     return unsubscribe;
   }, [navigation]);
 
-
-  const { data: allProducts, isLoading, refetch } = useQuery({
+  const {
+    data: allProducts,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
   });
 
-
-  const favoriteProducts = allProducts?.filter(product => 
-    favoriteIds.includes(product.id)
-  ) || [];
+  const favoriteProducts =
+    allProducts?.filter(product => favoriteIds.includes(product.id)) || [];
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -169,7 +170,11 @@ const WishlistScreen = () => {
     return (
       <SafeAreaView style={styles.loaderContainer}>
         <View style={styles.loaderContainer}>
-          <Ionicons name="heart-outline" size={64} color={theme.colors.textSecondary} />
+          <Ionicons
+            name="heart-outline"
+            size={64}
+            color={theme.colors.textSecondary}
+          />
           <Text style={styles.loadingText}>{t('loading_wishlist')}</Text>
         </View>
       </SafeAreaView>
@@ -185,7 +190,6 @@ const WishlistScreen = () => {
           icon="heart-outline"
           actionText={t('browse_products')}
           onAction={() => {
-
             navigation.navigate('Products' as never);
           }}
         />
@@ -215,7 +219,6 @@ const WishlistScreen = () => {
         ListEmptyComponent={
           refreshing ? (
             <>
-
               <View style={styles.skeletonSearchContainer}>
                 <View style={styles.skeletonSearchBar}>
                   <View style={styles.skeletonSearchIcon} />
@@ -223,9 +226,8 @@ const WishlistScreen = () => {
                   <View style={styles.skeletonClearButton} />
                 </View>
               </View>
-              
-              <View style={styles.skeletonGrid}>
 
+              <View style={styles.skeletonGrid}>
                 <View style={styles.skeletonWishlistItem}>
                   <View style={styles.skeletonCard}>
                     <Loader height={140} />

@@ -13,21 +13,16 @@ const CartClearAllButton = () => {
 
   const handleClearCart = () => {
     if (cartItems.length === 0) return;
-    
-    Alert.alert(
-      t('clear_cart'),
-      t('clear_cart_confirm'),
-      [
-        { text: t('cancel'), style: 'cancel' },
-        {
-          text: t('clear_all'),
-          style: 'destructive',
-          onPress: () => dispatch(clearCart()),
-        },
-      ]
-    );
-  };
 
+    Alert.alert(t('clear_cart'), t('clear_cart_confirm'), [
+      { text: t('cancel'), style: 'cancel' },
+      {
+        text: t('clear_all'),
+        style: 'destructive',
+        onPress: () => dispatch(clearCart()),
+      },
+    ]);
+  };
 
   if (cartItems.length === 0) {
     return null;

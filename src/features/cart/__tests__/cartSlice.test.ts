@@ -49,7 +49,7 @@ describe('cartSlice', () => {
 
       expect(newState.items).toHaveLength(1);
       expect(newState.items[0].quantity).toBe(3);
-      expect(newState.total).toBe(89.97); 
+      expect(newState.total).toBe(89.97);
     });
 
     it('should calculate total correctly for multiple products', () => {
@@ -60,7 +60,7 @@ describe('cartSlice', () => {
       state = cartReducer(state, action2);
 
       expect(state.items).toHaveLength(2);
-      expect(state.total).toBe(49.98); 
+      expect(state.total).toBe(49.98);
     });
   });
 
@@ -104,7 +104,7 @@ describe('cartSlice', () => {
       const newState = cartReducer(stateWithProduct, action);
 
       expect(newState.items[0].quantity).toBe(3);
-      expect(newState.total).toBe(89.97); 
+      expect(newState.total).toBe(89.97);
     });
 
     it('should remove product when quantity is 0', () => {

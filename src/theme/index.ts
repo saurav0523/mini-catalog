@@ -2,36 +2,36 @@ export interface ThemeColors {
   background: string;
   surface: string;
   surfaceVariant: string;
-  
+
   text: string;
   textSecondary: string;
   textTertiary: string;
-  
+
   primary: string;
   primaryVariant: string;
   onPrimary: string;
-  
+
   secondary: string;
   secondaryVariant: string;
   onSecondary: string;
-  
+
   success: string;
   error: string;
   warning: string;
   info: string;
-  
+
   border: string;
   divider: string;
-  
+
   card: string;
   cardBorder: string;
   inputBackground: string;
   inputBorder: string;
-  
+
   tabBar: string;
   tabBarActive: string;
   tabBarInactive: string;
-  
+
   navigationBar: string;
   navigationTitle: string;
 }
@@ -64,36 +64,36 @@ export const lightTheme: Theme = {
     background: '#FFFFFF',
     surface: '#F8F9FA',
     surfaceVariant: '#F1F3F4',
-    
+
     text: '#1C1C1E',
     textSecondary: '#6C6C70',
     textTertiary: '#8E8E93',
-    
+
     primary: '#007AFF',
     primaryVariant: '#0056CC',
     onPrimary: '#FFFFFF',
-    
+
     secondary: '#5856D6',
     secondaryVariant: '#3634A3',
     onSecondary: '#FFFFFF',
-    
+
     success: '#34C759',
     error: '#FF3B30',
     warning: '#FF9500',
     info: '#007AFF',
-    
+
     border: '#E5E5EA',
     divider: '#C6C6C8',
-    
+
     card: '#FFFFFF',
     cardBorder: '#E5E5EA',
     inputBackground: '#FFFFFF',
     inputBorder: '#C6C6C8',
-    
+
     tabBar: '#FFFFFF',
     tabBarActive: '#007AFF',
     tabBarInactive: '#8E8E93',
-    
+
     navigationBar: '#FFFFFF',
     navigationTitle: '#1C1C1E',
   },
@@ -141,27 +141,27 @@ export const darkTheme: Theme = {
     background: '#000000',
     surface: '#1C1C1E',
     surfaceVariant: '#2C2C2E',
-    
+
     text: '#FFFFFF',
     textSecondary: '#EBEBF5',
     textTertiary: '#EBEBF599',
-    
+
     primary: '#0A84FF',
     primaryVariant: '#409CFF',
     onPrimary: '#000000',
-    
+
     secondary: '#5E5CE6',
     secondaryVariant: '#7D7AFF',
     onSecondary: '#000000',
-    
+
     success: '#30D158',
     error: '#FF453A',
     warning: '#FF9F0A',
     info: '#0A84FF',
-    
+
     border: '#38383A',
     divider: '#48484A',
-    
+
     card: '#1C1C1E',
     cardBorder: '#38383A',
     inputBackground: '#2C2C2E',
@@ -170,8 +170,7 @@ export const darkTheme: Theme = {
     tabBar: '#1C1C1E',
     tabBarActive: '#0A84FF',
     tabBarInactive: '#48484A',
-    
-       
+
     navigationBar: '#1C1C1E',
     navigationTitle: '#FFFFFF',
   },

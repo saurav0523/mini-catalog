@@ -19,7 +19,7 @@ const products: Product[] = productsData as Product[];
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchProducts = async (): Promise<Product[]> => {
-  await delay(800); 
+  await delay(800);
   return products;
 };
 

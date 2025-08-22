@@ -9,25 +9,22 @@ import { clearFavorites } from '../features/products/favoritesSlice';
 const WishlistClearAllButton = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const favoriteIds = useSelector((state: RootState) => state.favorites.favoriteIds);
+  const favoriteIds = useSelector(
+    (state: RootState) => state.favorites.favoriteIds
+  );
 
   const handleClearWishlist = () => {
     if (favoriteIds.length === 0) return;
-    
-    Alert.alert(
-      t('clear_wishlist'),
-      t('clear_wishlist_confirm'),
-      [
-        { text: t('cancel'), style: 'cancel' },
-        {
-          text: t('clear_all'),
-          style: 'destructive',
-          onPress: () => dispatch(clearFavorites()),
-        },
-      ]
-    );
-  };
 
+    Alert.alert(t('clear_wishlist'), t('clear_wishlist_confirm'), [
+      { text: t('cancel'), style: 'cancel' },
+      {
+        text: t('clear_all'),
+        style: 'destructive',
+        onPress: () => dispatch(clearFavorites()),
+      },
+    ]);
+  };
 
   if (favoriteIds.length === 0) {
     return null;

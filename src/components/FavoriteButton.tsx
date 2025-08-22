@@ -11,7 +11,9 @@ interface FavoriteButtonProps {
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ productId }) => {
   const dispatch = useDispatch();
-  const favoriteIds = useSelector((state: RootState) => state.favorites.favoriteIds);
+  const favoriteIds = useSelector(
+    (state: RootState) => state.favorites.favoriteIds
+  );
   const isFavorite = favoriteIds.includes(productId);
 
   const handleFavoriteToggle = () => {

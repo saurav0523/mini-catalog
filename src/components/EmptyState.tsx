@@ -46,7 +46,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
   }, [fadeAnim, scaleAnim]);
 
   return (
-    <Animated.View 
+    <Animated.View
       style={[
         styles.container,
         {
@@ -60,7 +60,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       </View>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.message}>{message}</Text>
-      
+
       {actionText && onAction && (
         <TouchableOpacity style={styles.actionButton} onPress={onAction}>
           <Text style={styles.actionButtonText}>{actionText}</Text>

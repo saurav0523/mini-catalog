@@ -85,12 +85,7 @@ const ThemeToggle: React.FC = () => {
               },
             ]}
           >
-            <Text
-              style={[
-                styles.modalTitle,
-                { color: theme.colors.text },
-              ]}
-            >
+            <Text style={[styles.modalTitle, { color: theme.colors.text }]}>
               Choose Theme
             </Text>
 
@@ -106,13 +101,20 @@ const ThemeToggle: React.FC = () => {
               <Ionicons
                 name="sunny"
                 size={24}
-                color={themeMode === 'light' ? theme.colors.onPrimary : theme.colors.primary}
+                color={
+                  themeMode === 'light'
+                    ? theme.colors.onPrimary
+                    : theme.colors.primary
+                }
               />
               <Text
                 style={[
                   styles.themeOptionText,
                   {
-                    color: themeMode === 'light' ? theme.colors.onPrimary : theme.colors.text,
+                    color:
+                      themeMode === 'light'
+                        ? theme.colors.onPrimary
+                        : theme.colors.text,
                   },
                 ]}
               >
@@ -132,13 +134,20 @@ const ThemeToggle: React.FC = () => {
               <Ionicons
                 name="moon"
                 size={24}
-                color={themeMode === 'dark' ? theme.colors.onPrimary : theme.colors.primary}
+                color={
+                  themeMode === 'dark'
+                    ? theme.colors.onPrimary
+                    : theme.colors.primary
+                }
               />
               <Text
                 style={[
                   styles.themeOptionText,
                   {
-                    color: themeMode === 'dark' ? theme.colors.onPrimary : theme.colors.text,
+                    color:
+                      themeMode === 'dark'
+                        ? theme.colors.onPrimary
+                        : theme.colors.text,
                   },
                 ]}
               >
@@ -158,13 +167,20 @@ const ThemeToggle: React.FC = () => {
               <Ionicons
                 name="desktop"
                 size={24}
-                color={themeMode === 'system' ? theme.colors.onPrimary : theme.colors.primary}
+                color={
+                  themeMode === 'system'
+                    ? theme.colors.onPrimary
+                    : theme.colors.primary
+                }
               />
               <Text
                 style={[
                   styles.themeOptionText,
                   {
-                    color: themeMode === 'system' ? theme.colors.onPrimary : theme.colors.text,
+                    color:
+                      themeMode === 'system'
+                        ? theme.colors.onPrimary
+                        : theme.colors.text,
                   },
                 ]}
               >

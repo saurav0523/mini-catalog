@@ -15,12 +15,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const THEME_STORAGE_KEY = '@theme_mode';
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const systemColorScheme = useColorScheme();
   const [themeMode, setThemeMode] = useState<ThemeMode>('system');
   const [theme, setTheme] = useState<Theme>(lightTheme);
 
-  
   useEffect(() => {
     const loadThemeMode = async () => {
       try {
@@ -36,7 +37,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     loadThemeMode();
   }, []);
 
-  
   useEffect(() => {
     const getCurrentTheme = (): Theme => {
       if (themeMode === 'system') {
@@ -48,7 +48,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setTheme(getCurrentTheme());
   }, [themeMode, systemColorScheme]);
 
-  
   const saveThemeMode = async (mode: ThemeMode) => {
     try {
       await AsyncStorage.setItem(THEME_STORAGE_KEY, mode);
@@ -57,13 +56,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  
   const handleSetThemeMode = (mode: ThemeMode) => {
     setThemeMode(mode);
     saveThemeMode(mode);
   };
 
-  
   const toggleTheme = () => {
     const newMode: ThemeMode = themeMode === 'light' ? 'dark' : 'light';
     handleSetThemeMode(newMode);
@@ -78,9 +75,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 

@@ -57,7 +57,7 @@ A production-ready React Native mobile application demonstrating modern mobile d
 - **Quality Gates**: Linting, formatting, and test checks
 - **Pre-commit Hooks**: Local validation before commits
 
-##  Architecture
+## Architecture
 
 ### Project Structure
 
@@ -229,8 +229,7 @@ eas submit -p ios
 eas submit -p android
 ```
 
-##  Performance & Optimization
-
+## Performance & Optimization
 
 ### Performance Metrics
 
@@ -238,7 +237,7 @@ eas submit -p android
 - **Screen Transitions**: <300ms
 - **Image Loading**: Lazy loading with placeholders
 
-##  Security
+## Security
 
 ### Data Protection
 
@@ -247,8 +246,7 @@ eas submit -p android
 - **Input Validation**: Yup schema validation
 - **Error Handling**: No sensitive data in logs
 
-
-##  Contributing
+## Contributing
 
 ### Development Workflow
 
@@ -265,16 +263,13 @@ eas submit -p android
 - **Prettier**: Consistent formatting
 - **Husky**: Pre-commit validation
 
-##  Changelog
+## Changelog
 
 ### v1.0.0 (Current)
 
--  Core app functionality
--  Redux state management
--  i18n with RTL support
--  Offline capabilities
--  Comprehensive testing
--  CI/CD pipeline
-
-
-
+- Core app functionality
+- Redux state management
+- i18n with RTL support
+- Offline capabilities
+- Comprehensive testing
+- CI/CD pipeline

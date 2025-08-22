@@ -21,7 +21,6 @@ const QuantityStepper: React.FC<QuantityStepperProps> = ({
     if (quantity > minQuantity) {
       onQuantityChange(quantity - 1);
     } else if (onMinusClick) {
-      
       onMinusClick();
     }
   };
@@ -45,7 +44,9 @@ const QuantityStepper: React.FC<QuantityStepperProps> = ({
         <Ionicons
           name="remove"
           size={20}
-          color={quantity <= minQuantity && !onMinusClick ? '#C7C7CC' : '#007AFF'}
+          color={
+            quantity <= minQuantity && !onMinusClick ? '#C7C7CC' : '#007AFF'
+          }
         />
       </TouchableOpacity>
 

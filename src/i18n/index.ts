@@ -9,7 +9,6 @@ const resources = {
   ar: { translation: ar },
 };
 
-
 const defaultLanguage = 'en';
 
 i18n.use(initReactI18next).init({

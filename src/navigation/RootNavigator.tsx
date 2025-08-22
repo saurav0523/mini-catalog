@@ -51,7 +51,7 @@ const ProductStack = () => {
       <Stack.Screen
         name="ProductList"
         component={ProductListScreen}
-        options={{ 
+        options={{
           title: t('catalog'),
           headerRight: () => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -64,7 +64,7 @@ const ProductStack = () => {
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetailsScreen}
-        options={({ route, navigation }: any) => ({ 
+        options={({ route, navigation }: any) => ({
           title: '',
           headerRight: () => {
             const { product } = route.params as { product: any };
@@ -75,7 +75,11 @@ const ProductStack = () => {
               style={{ marginLeft: 16 }}
               onPress={() => navigation.goBack()}
             >
-              <Ionicons name="arrow-back" size={24} color={theme.colors.navigationTitle} />
+              <Ionicons
+                name="arrow-back"
+                size={24}
+                color={theme.colors.navigationTitle}
+              />
             </TouchableOpacity>
           ),
         })}
@@ -88,8 +92,13 @@ const RootNavigator = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const favoriteIds = useSelector((state: RootState) => state.favorites.favoriteIds);
-  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const favoriteIds = useSelector(
+    (state: RootState) => state.favorites.favoriteIds
+  );
+  const cartItemCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
   const wishlistCount = favoriteIds.length;
 
   return (
@@ -123,7 +132,7 @@ const RootNavigator = () => {
           fontSize: 18,
           color: theme.colors.navigationTitle,
         },
-        headerLargeTitle: false, 
+        headerLargeTitle: false,
       })}
     >
       <Tab.Screen

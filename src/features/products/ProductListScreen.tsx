@@ -30,11 +30,9 @@ const ProductListScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
-
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('ProductList focused - clearing navigation cache');
-
     });
 
     return unsubscribe;
@@ -51,16 +49,16 @@ const ProductListScreen = () => {
     queryFn: fetchProducts,
   });
 
-
   const filteredProducts = useMemo(() => {
     if (!searchQuery.trim()) return products;
-    
+
     const query = searchQuery.toLowerCase().trim();
-    return products.filter(product => 
-      product.name.toLowerCase().includes(query) ||
-      product.description?.toLowerCase().includes(query) ||
-      product.category?.toLowerCase().includes(query) ||
-      product.price.toString().includes(query)
+    return products.filter(
+      product =>
+        product.name.toLowerCase().includes(query) ||
+        product.description?.toLowerCase().includes(query) ||
+        product.category?.toLowerCase().includes(query) ||
+        product.price.toString().includes(query)
     );
   }, [products, searchQuery]);
 
@@ -230,7 +228,6 @@ const ProductListScreen = () => {
   if (isLoading || isRefetching) {
     return (
       <SafeAreaView style={styles.container}>
-
         <View style={styles.skeletonSearchContainer}>
           <View style={styles.skeletonSearchBar}>
             <View style={styles.skeletonSearchIcon} />
@@ -238,9 +235,8 @@ const ProductListScreen = () => {
             <View style={styles.skeletonClearButton} />
           </View>
         </View>
-        
+
         <View style={styles.skeletonGrid}>
-
           <View style={styles.skeletonRow}>
             <View style={styles.skeletonCard}>
               <View style={styles.skeletonImage} />
@@ -278,7 +274,7 @@ const ProductListScreen = () => {
               </View>
             </View>
           </View>
-      
+
           <View style={styles.skeletonRow}>
             <View style={styles.skeletonCard}>
               <View style={styles.skeletonImage} />
@@ -331,7 +327,7 @@ const ProductListScreen = () => {
             placeholder={t('search_placeholder')}
             value={searchQuery}
             onChangeText={handleSearchChange}
-            onSubmitEditing={() => {}} 
+            onSubmitEditing={() => {}}
             returnKeyType="search"
           />
           {searchQuery.length > 0 && (
@@ -339,7 +335,11 @@ const ProductListScreen = () => {
               onPress={handleClearSearch}
               style={styles.clearButton}
             >
-              <Ionicons name="close-circle" size={20} color={theme.colors.textSecondary} />
+              <Ionicons
+                name="close-circle"
+                size={20}
+                color={theme.colors.textSecondary}
+              />
             </TouchableOpacity>
           )}
         </View>
@@ -351,7 +351,10 @@ const ProductListScreen = () => {
             {searchResultsCount} {t('search_results_count')}
           </Text>
           {searchQuery.length > 0 && (
-            <TouchableOpacity onPress={handleClearSearch} style={styles.clearSearchButton}>
+            <TouchableOpacity
+              onPress={handleClearSearch}
+              style={styles.clearSearchButton}
+            >
               <Text style={styles.clearSearchText}>{t('clear_search')}</Text>
             </TouchableOpacity>
           )}
@@ -380,7 +383,6 @@ const ProductListScreen = () => {
         ListEmptyComponent={
           isRefetching ? (
             <>
-
               <View style={styles.skeletonSearchContainer}>
                 <View style={styles.skeletonSearchBar}>
                   <View style={styles.skeletonSearchIcon} />
@@ -388,9 +390,8 @@ const ProductListScreen = () => {
                   <View style={styles.skeletonClearButton} />
                 </View>
               </View>
-              
-              <View style={styles.skeletonGrid}>
 
+              <View style={styles.skeletonGrid}>
                 <View style={styles.skeletonRow}>
                   <View style={styles.skeletonCard}>
                     <View style={styles.skeletonImage} />

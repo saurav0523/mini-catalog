@@ -158,28 +158,31 @@ const WishlistCard: React.FC<WishlistCardProps> = ({
         <View style={styles.imageContainer}>
           <Image source={{ uri: product.image }} style={styles.image} />
         </View>
-        
+
         <View style={styles.productInfo}>
           <View>
             <Text style={styles.name} numberOfLines={2}>
               {product.name}
             </Text>
             <Text style={styles.category}>{product.category}</Text>
-            
+
             <View style={styles.ratingContainer}>
               <Ionicons name="star" size={14} color={theme.colors.warning} />
               <Text style={styles.ratingText}>{product.rating}</Text>
               <Text style={styles.reviews}>({product.reviews})</Text>
             </View>
           </View>
-          
+
           <Text style={styles.price}>${product.price.toFixed(2)}</Text>
         </View>
       </View>
-      
+
       <View style={styles.actions}>
         <TouchableOpacity
-          style={[styles.actionButton, isProductInCart ? styles.moveToCartButton : styles.addToCartButton]}
+          style={[
+            styles.actionButton,
+            isProductInCart ? styles.moveToCartButton : styles.addToCartButton,
+          ]}
           onPress={() => {
             if (isProductInCart) {
               // If product is already in cart, navigate to cart
@@ -190,16 +193,16 @@ const WishlistCard: React.FC<WishlistCardProps> = ({
             }
           }}
         >
-          <Ionicons 
-            name={isProductInCart ? "cart" : "cart-outline"} 
-            size={18} 
-            color={theme.colors.onPrimary} 
+          <Ionicons
+            name={isProductInCart ? 'cart' : 'cart-outline'}
+            size={18}
+            color={theme.colors.onPrimary}
           />
           <Text style={styles.addToCartText}>
             {isProductInCart ? t('move_to_cart') : t('add_to_cart')}
           </Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity
           style={[styles.actionButton, styles.removeButton]}
           onPress={onRemoveFromWishlist}

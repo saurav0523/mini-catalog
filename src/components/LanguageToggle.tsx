@@ -1,5 +1,11 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -11,8 +17,7 @@ const LanguageToggle = () => {
 
   const toggleLanguage = () => {
     const newLanguage = currentLanguage === 'en' ? 'ar' : 'en';
-    
-  
+
     Animated.sequence([
       Animated.timing(scaleAnim, {
         toValue: 0.9,
@@ -25,14 +30,24 @@ const LanguageToggle = () => {
         useNativeDriver: true,
       }),
     ]).start();
-    
+
     i18n.changeLanguage(newLanguage);
   };
 
   return (
     <TouchableOpacity style={styles.container} onPress={toggleLanguage}>
-      <Animated.View style={[styles.animatedContainer, { transform: [{ scale: scaleAnim }] }]}>
-        <Ionicons name="language" size={20} color="#007AFF" style={styles.icon} />
+      <Animated.View
+        style={[
+          styles.animatedContainer,
+          { transform: [{ scale: scaleAnim }] },
+        ]}
+      >
+        <Ionicons
+          name="language"
+          size={20}
+          color="#007AFF"
+          style={styles.icon}
+        />
         <Text style={styles.text}>{currentLanguage.toUpperCase()}</Text>
       </Animated.View>
     </TouchableOpacity>
